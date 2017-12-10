@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Complex icons</title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+
+      // The following example creates complex markers to indicate beaches near
+      // Sydney, NSW, Australia. Note that the anchor is set to (0,32) to correspond
+      // to the base of the flagpole.
+
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 13,
+          center: {lat:24.178955 , lng: 120.646873}
+        });
+
+        setMarkers_p(map);
+        setMarkers_g(map);
+      }
+
+      // Data for the markers consisting of a name, a LatLng and a zIndex for the
+      // order in which these markers should display on top of each other.
+      var postoffice = [
+        ['東海大學郵局(臺中5支)',24.179034,120.601637,'臺中市西屯區臺灣大道4段1727號(東海大學內)'],
+        ['臺中逢甲郵局(臺中25支)',24.175274,120.649135,'臺中市西屯區河南路2段268號'],
+        ['臺中西屯郵局(臺中30支)',24.176695,120.637655,'臺中市西屯區黎明路3段130號'],
+        ['臺中何厝郵局(臺中44支)',24.164629,120.654202,'臺中市西屯區青海路1段83號'],
+        ['臺中工業區郵局(臺中46支)',24.169450,120.606562,'臺中市西屯區工業區六路10號'],
+        ['臺中榮總郵局(臺中52支)',24.183960,120.604836,'臺中市西屯區臺灣大道4段1650號(台中榮總內)'],
+        ['臺中永安郵局(臺中61支)',24.190483,120.612213,'臺中市西屯區永安里西屯路3段166-80號'],
+        ['臺中大隆路郵局(臺中67支)',24.156537,120.652866,'臺中市西屯區大隆路60、62號'],
+        ['臺中福安郵局(臺中69支)',24.183414,120.618611,'臺中市西屯區福順路318號'],
+        ['臺中第3郵政代辦所',24.166456,120.643244,'臺中市西屯區臺灣大道3段366號1樓'],
+        ['臺中第6郵政代辦所',24.208606,120.614090,'臺中市西屯區中科路1號']
+      ];
+
+      //postoffice
+      function setMarkers_p(map) {
+        var image = {
+          url: 'http://a4.qpic.cn/psb?/V12y9VqY28m3YH/5dbVfTOlQSYODqgfroJLNkXpmdUCUjIGkFjz*CyMPQU!/m/dPMAAAAAAAAAnull&bo=IAAgAAAAAAADByI!&rf=photolist&t=5',
+          size: new google.maps.Size(32,32)
+        };
+
+        var info = new google.maps.InfoWindow();
+
+        for (var i = 0; i < postoffice.length; i++) {
+          var post = postoffice[i];
+          var marker = new google.maps.Marker({
+            position: {lat: post[1], lng: post[2]},
+            map: map,
+            icon: image
+          });
+
+          marker.addListener('mouseover',(function(marker,i){
+            return function(){
+              info.setContent(postoffice[i][3]);
+              info.open(map,marker);
+            }
+          })(marker,i));
+
+        }
+      }
+
+      //gasstation
+      var gas = [
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+      ]
+      function setMarkers_g(map){
+        var image = {
+          url: 'http://a4.qpic.cn/psb?/V12y9VqY28m3YH/ZeWxruwxL4nCzTSRr0TwW251fgCQdc0Dau9zGCuBuoY!/m/dD8BAAAAAAAAnull&bo=IAAiAAAAAAADByA!&rf=photolist&t=5',
+          size: new google.maps.Size(32,32)
+        };
+
+        var info = new google.maps.InfoWindow();
+
+        for (var i = 0; i < gas.length; i++) {
+          var g = gas[i];
+          var marker = new google.maps.Marker({
+            position: {lat: gas[1], lng: gas[2]},
+            map: map,
+            icon: image
+          });
+
+          marker.addListener('mouseover',(function(marker,i){
+            return function(){
+              info.setContent(gas[i][3]);
+              info.open(map,marker);
+            }
+          })(marker,i));
+        }
+      }
+
+
+
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbEftm3aTKij1PSYnpk_VEjRLGNLwpLtk&callback=initMap">
+    </script>
+  </body>
+</html>
