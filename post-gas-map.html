@@ -121,7 +121,7 @@
 
           marker.addListener('mouseover',(function(marker,i){
             return function(){
-              info.setContent(gas[i][0] + "<br/>" +gas[i][3]);
+              info.setContent(gas[i][0] + "<br/><br/>" +gas[i][3]);
               info.open(map,marker);
             }
           })(marker,i));
